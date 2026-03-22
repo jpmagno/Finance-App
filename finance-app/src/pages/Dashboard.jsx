@@ -1,6 +1,7 @@
 import StatCard from "../components/StatCard";
 import SpendingChart from "../components/SpendingChart";
 import StreakBadge from "../components/StreakBadge";
+import SpendingHeatmap from "../components/SpendingHeatmap";
 
 function Dashboard() {
   return (
@@ -16,6 +17,11 @@ function Dashboard() {
         <StatCard label="Monthly spending" value="$1,240" trend="up" />
         <StatCard label="Monthly income" value="$3,500" trend="up" />
         <StatCard label="Saved this month" value="$680" trend="up" />
+      </div>
+
+      {/* Spending heatmap */}
+      <div className="mb-8">
+        <SpendingHeatmap />
       </div>
 
       {/* Chart */}
