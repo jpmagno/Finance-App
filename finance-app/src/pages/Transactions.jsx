@@ -53,15 +53,28 @@ function Transactions() {
     <div className="p-6 bg-gray-950 min-h-screen">
       <h1 className="text-2xl font-bold text-white mb-6">Transactions</h1>
 
-      {/* CSV Upload */}
-      <div className="mb-6">
-        <CSVUpload onUpload={handleUpload} />
-      </div>
+      {/* CSV Upload - hides after upload */}
+      {!uploaded && (
+        <div className="mb-6">
+          <CSVUpload onUpload={handleUpload} />
+        </div>
+      )}
 
       {/* Uploaded badge */}
       {uploaded && (
-        <div className="mb-4 px-4 py-2 bg-green-900 text-green-400 text-sm rounded-xl inline-block">
-          CSV imported successfully - {transactions.length} transactions loaded
+        <div className="mb-4 flex items-center gap-4">
+          <div clasName="px-4 py-2 bg-green-900 text-green-400 text-sm rounded-xl">
+            CSV imported - {transactions.length} transactions loaded
+          </div>
+          <button
+            onClick={() => {
+              setTransactions(defaultTransactions);
+              setUploaded(false);
+            }}
+            className="text-gray-500 text-sm hover:text-gray-300 transition-colors"
+          >
+            Reset
+          </button>
         </div>
       )}
 
