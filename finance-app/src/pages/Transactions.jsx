@@ -1,46 +1,71 @@
+import { useState } from "react";
+import CSVUpload from "../components/CSVUpload";
+
+const defaultTransactions = [
+  {
+    id: 1,
+    name: "Spotify",
+    category: "Subscriptions",
+    amount: -9.99,
+    date: "Mar 20",
+  },
+  { id: 2, name: "Salary", category: "Income", amount: 3500, date: "Mar 15" },
+  {
+    id: 3,
+    name: "Whole Foods",
+    category: "Groceries",
+    amount: -84.32,
+    date: "Mar 14",
+  },
+  {
+    id: 4,
+    name: "Netflix",
+    category: "Subscriptions",
+    amount: -15.99,
+    date: "Mar 13",
+  },
+  {
+    id: 5,
+    name: "Electric bill",
+    category: "Utilities",
+    amount: -112.0,
+    date: "Mar 12",
+  },
+  {
+    id: 6,
+    name: "Chipotle",
+    category: "Dining",
+    amount: -13.45,
+    date: "Mar 11",
+  },
+];
+
 function Transactions() {
-  const transactions = [
-    {
-      id: 1,
-      name: "Spotify",
-      category: "Subscriptions",
-      amount: -9.99,
-      date: "Mar 20",
-    },
-    { id: 2, name: "Salary", category: "Income", amount: 3500, date: "Mar 15" },
-    {
-      id: 3,
-      name: "Whole Foods",
-      category: "Groceries",
-      amount: -84.32,
-      date: "Mar 14",
-    },
-    {
-      id: 4,
-      name: "Netflix",
-      category: "Subscriptions",
-      amount: -15.99,
-      date: "Mar 13",
-    },
-    {
-      id: 5,
-      name: "Electric bill",
-      category: "Utilities",
-      amount: -112.0,
-      date: "Mar 12",
-    },
-    {
-      id: 6,
-      name: "Chipotle",
-      category: "Dining",
-      amount: -13.45,
-      date: "Mar 11",
-    },
-  ];
+  const [transactions, setTransactions] = useState(defaultTransactions);
+  const [uploaded, setUploaded] = useState(false);
+
+  const handleUpload = (newTransactions) => {
+    setTransactions(newTransactions);
+    setUploaded(true);
+  };
 
   return (
     <div className="p-6 bg-gray-950 min-h-screen">
       <h1 className="text-2xl font-bold text-white mb-6">Transactions</h1>
+
+      {/* CSV Upload */}
+      <div className="mb-6">
+        <CSVUpload onUpload={handleUpload} />
+      </div>
+
+      {/* Uploaded badge */}
+      {uploaded && (
+        <div className="mb-4 px-4 py-2 bg-green-900 text-green-400 text-sm rounded-xl inline-block">
+          CSV imported successfully - {transactions.length} transactions loaded
+        </div>
+      )}
+
+      {/* Transaction list */}
       <div className="bg-gray-900 rounded-2xl overflow-hidden">
         {transactions.map((t, i) => (
           <div
