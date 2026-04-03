@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CSVUpload from "../components/CSVUpload";
+import { fetchTransactions } from "../api/transactions";
 
 const defaultTransactions = [
   {
@@ -43,6 +44,16 @@ const defaultTransactions = [
 function Transactions() {
   const [transactions, setTransactions] = useState(defaultTransactions);
   const [uploaded, setUploaded] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchTransactions()
+      .then((data) => {
+        if (data && data.length > 0) setTransactions(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
 
   const handleUpload = (newTransactions) => {
     setTransactions(newTransactions);
