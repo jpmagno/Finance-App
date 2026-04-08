@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "http://3.238.171.183:8000";
 
 export const fetchTransactions = async () => {
   const response = await fetch(`${BASE_URL}/transactions`);
