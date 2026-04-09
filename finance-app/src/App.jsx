@@ -2,12 +2,14 @@ import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Transactions from "./pages/Transactions";
 import Goals from "./pages/Goals";
+import Upgrade from "./pages/Upgrade";
 
 function Sidebar() {
   const links = [
     { to: "/", label: "Dashboard" },
     { to: "/transactions", label: "Transactions" },
     { to: "/goals", label: "Goals" },
+    { to: "/upgrade", label: "Upgrade to Pro" },
   ];
 
   return (
@@ -45,6 +47,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/goals" element={<Goals />} />
+            <Route path="/upgrade" element={<Upgrade />} />
           </Routes>
         </main>
       </div>
